@@ -1,7 +1,7 @@
 body{
 max-width: 0;
 font-family: 'Poppins',sans-serif;
-background: linear-gradient(to right,#fdfdfd,#ebebeb);
+background: linear-gradient(center,#fdfdfd,#ebebeb);
 color: #333;
 text-align: center;
 padding: 50px;
@@ -13,7 +13,7 @@ h1 {
 }
 button{
     padding: 12px 25px;
-    font-size: 10cm;
+    font-size: 5cm;
     border:none;
     border-radius: 30px;
     cursor: pointer;
