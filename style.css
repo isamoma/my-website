@@ -1,37 +1,55 @@
 body{
 max-width: 0;
-font-family: 'Poppins',sans-serif;
+padding: 0;
+font-family: 'Segoe UI',sans-serif;
 background: linear-gradient(center,#fdfdfd,#ebebeb);
 color: #333;
 text-align: center;
 padding: 50px;
 }
+.container {
+    padding: 60px 20px;
+}
   
 h1 {
-    font-size: 2.5cm;
+    font-size: 2cm;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 1.1cm;
     margin-bottom: 30px;
 }
+.button-group{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 button{
+    text-decoration: none;
     padding: 12px 25px;
-    font-size: 5cm;
-    border:none;
+    font-size: 2cm;
+    
     border-radius: 30px;
     cursor: pointer;
-    margin: 10px;
-    transition: background 0,3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0,3s ease;
+    font-weight: 600;
 }
-a button{
-    text-decoration: none;
+.btn.tiktok {
+    background-color: #010101;
     color: white;
 }
 
-button:hover{
-    opacity: 0.9; 
+.btn.tiktok:hover {
+    background-color: #333; 
 }
-button:first-of-type {
-    background-color: #1DA1F2;/*Tik Tok-like blue*/
+.btn.youtube {
+    background-color: #333;
 }
-button:last-of-type{
-    background-color: #FF0000;/*Youtube red*/
+.btn.youtube:hover{
+    background-color:#cc0000;
 }
