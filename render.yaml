@@ -2,7 +2,7 @@ yaml
 
 services:
   -type:web
-  name:flask-site
+  name:login-website
   env:python
   plan:free
   buildCommand:""
