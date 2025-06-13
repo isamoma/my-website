@@ -1,28 +1,35 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template, request, redirect, session
 
-app= Flask(__name__)
-#Dummy user
-USERNAME="admin"
-PASSWORD="1234"
+app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
-@app.route('/')
+users = {"admin": "password123"}
+
+@app.route("/")
 def home():
-    return render_template("index.html")
+    if "username" in session:
+        return f"Welcome {session['username']} <br><a href='/logout'>Logout</a>"
+    return redirect("/login")
 
-@app.route('/login',methods=['GET','POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method=='POST':
-        username=request.form['username']
-        password=request.form['password']
-        if username==USERNAME and password==PASSWORD:
-            return (url_for('welcome'))
-    else:
-        return render_template('login.html',error="Invalid credentials")
-    
-    return render_template('login.html')
-@app.route('/welcome')
-def welcome():
-    return"Welcome! you are logged in,"
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if username in users and users[username] == password:
+            session["username"] = username
+            return redirect("/")
+        return "Invalid credentials"
+    return render_template("login.html")
 
-if __name__=="__main__":
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return redirect("/login")
+
+@app.route("/market")
+def market():
+    return render_template("market.html")
+
+if __name__ == "__main__":
     app.run(debug=True)
