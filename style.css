@@ -57,3 +57,12 @@ button{
 .btn.youtube:hover{
     background-color:#cc0000;
 }
+.login-link{
+	display: inline-block;
+	margin-top: 20px;
+	color: white;
+	text-decoration: none;
+	background-color: #333;
+	padding: 10px 20px;
+	border-radius: 10px;
+}
