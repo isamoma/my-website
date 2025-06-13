@@ -1,5 +1,4 @@
 yaml
-
 services:
   -type:web
   name:login-website
