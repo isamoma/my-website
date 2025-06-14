@@ -1,6 +1,5 @@
-yaml
 services:
-  -type:web
+- type:web
   name:login-website
   env:python
   plan:free
