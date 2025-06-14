@@ -1,7 +1,7 @@
 services:
-  - type: web
-    name: login-website
-    env: python
-    plan: free
-    buildCommand: ""
-    startCommand: "python app.py"
+  - type:web
+  name:login-website
+  env:python
+  plan:free
+  buildCommand:""
+  startCommand:python app.py
