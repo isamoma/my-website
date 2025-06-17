@@ -1,87 +1,85 @@
-body{
-max-width: 0;
-padding: 0;
-font-family: Arial, Helvetica, sans-serif;
-background:url('background.jpg')no-repeat center center;
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-color: #333;
-text-align: center;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: url('background.jpg') no-repeat center center;
+  background-size: cover;
+  color: #333;
+  text-align: center;
 }
+
 .hero-text {
-    text-align: center;
-    padding: 100px 20px;
-    background-color: rgba(0, 0, 0,0.5);/*dark overlay for readability*/
-    color: #fff;
-    max-width: 600px;
-    margin: auto;
-    border-radius: 10px;
-}
-    
-@media only screen and (max-width:600px) {
-.hero-text{
-    padding: 60px 15px;
-    font-size: 16px;
-}
+  text-align: center;
+  padding: 100px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .container {
-    padding: 60px 20px;
-    background-color: rgba(0, 0, 0,0.6);/*dark overlay*/
-    border-radius: 12px;
-    max-width: 60px;
-    margin: 80px auto;
+  padding: 60px 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 80px auto;
 }
-  
+
 h1 {
-    font-size: 2cm;
-    margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: white;
 }
 
-p{
-    font-size: 1.1cm;
-    margin-bottom: 30px;
-}
-.button-group{
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-button{
-    text-decoration: none;
-    padding: 12px 25px;
-    font-size: 2cm;
-    
-    border-radius: 30px;
-    cursor: pointer;
-    width: 160px;
-    display: inline-block;
-    text-align: center;
-    transition: background-color 0,3s ease;
-    font-weight: 600;
-}
-.btn.tiktok {
-    background-color: #010101;
-    color: white;
+p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: white;
 }
 
-.btn.tiktok:hover {
-    background-color: #333; 
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
-.btn.youtube {
-    background-color: #333;
+
+.button,
+.youtube-button {
+  text-decoration: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 160px;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
 }
-.btn.youtube:hover{
-    background-color:#cc0000;
+
+.button:hover {
+  background-color: #555;
 }
-.login-link{
-	display: inline-block;
-	margin-top: 20px;
-	color: white;
-	text-decoration: none;
-	background-color: #333;
-	padding: 10px 20px;
-	border-radius: 10px;
+
+.youtube-button {
+  background-color: red;
+}
+
+.youtube-button:hover {
+  background-color: #cc0000;
+}
+
+.login-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
