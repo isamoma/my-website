@@ -69,6 +69,14 @@ def admin_login():
 
     return render_template('admin_login.html')
 
+@app.route('/admin-panel')
+def admin_panel():
+    if 'admin' in session:
+        return render_template('admin_panel.html')
+    else:
+        return redirect(url_for('admin_login'))
+
+
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
