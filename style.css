@@ -87,3 +87,18 @@ p {
   padding: 10px 20px;
   border-radius: 10px;
 }
+
+.admin-link {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #555;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.admin-link:hover {
+  background-color: #000;
+}
