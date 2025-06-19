@@ -55,6 +55,20 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and password == 'admin123': # You can change this
+            session['admin'] = True
+            return redirect(url_for('admin_panel'))
+        else:
+            return "Access denied: Invalid credentials"
+
+    return render_template('admin_login.html')
+
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
