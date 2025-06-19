@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: url('background.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .dashboard-box {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-box">
+        <h2>Welcome, {{ username }}!</h2>
+        <p>This is your dashboard. More features coming soon!</p>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
