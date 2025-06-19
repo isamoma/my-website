@@ -69,7 +69,7 @@ def logout():
 @app.route('/products')
 def products():
     if 'username'in session:
-        return render_template('products.html',username=session['username])
+        return render_template('products.html',username=session['username'])
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
