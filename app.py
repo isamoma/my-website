@@ -76,6 +76,31 @@ def admin_panel():
     else:
         return redirect(url_for('admin_login'))
 
+# Temporary in-memory product list (will reset if app restarts)
+products = []
+
+@app.route('/add-product', methods=['GET', 'POST'])
+def add_product():
+    if 'admin' not in session:
+        return redirect(url_for('admin_login'))
+
+    if request.method == 'POST':
+        name = request.form['name']
+        price = request.form['price']
+        description = request.form['description']
+
+        product = {
+            'name': name,
+            'price': price,
+            'description': description
+        }
+
+        products.append(product)
+        return redirect(url_for('admin_panel'))
+
+    return render_template('add_product.html')
+
+
 
 @app.route('/dashboard')
 def dashboard():
