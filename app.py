@@ -62,12 +62,12 @@ def login():
 @app.route('/admin-login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get['username']
+        password = request.form.get['password']
 
         if username == 'admin' and password == 'admin123': # You can change this
             session['admin'] = True
-            return redirect(url_for('admin_panel'))
+            return redirect('/admin_panel')
         else:
             return "Access denied: Invalid credentials"
 
