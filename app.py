@@ -7,10 +7,8 @@ app.secret_key = 'your_secret_key_here' # Use a long random string in real apps
 
 #Setup database
 basedir =os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///"+
-os.path.join(basedir,'database.dp')
-app.config['SQLALACHEMY_TRACK_MODIFICATIONS']=
-False
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///'+os.path.join(basedir,'database.dp')
+app.config['SQLALACHEMY_TRACK_MODIFICATIONS']=False
 
 db =SQLAlchemy(app)
 
@@ -31,7 +29,7 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        users = load_users()
+        users=load_users()
         username = request.form['username']
         password = request.form['password']
 
@@ -79,9 +77,8 @@ def admin_login():
 def admin_panel():
     if 'admin' not in session:
         return redirect(url_for('admin.html'))
-
-     products = Product.query.all()
-     return render_template('admin_panel.html', products=products)
+    products = Product.query.all()
+    return render_template('admin_panel.html', products=products)
                             
 # Temporary in-memory product list (will reset if app restarts)
 products = []
@@ -128,3 +125,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(host='0.0.0.0',port=10000)
+   
