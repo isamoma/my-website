@@ -1,22 +1,28 @@
 from flask import Flask, render_template, request, redirect, session, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
-import json
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' # Use a long random string in real apps
 
-# Load users from file
-def load_users():
-    if os.path.exists('users.json'):
-        with open('users.json', 'r') as f:
-            return json.load(f)
-    return {}
+#Setup database
+basedir =os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///"+
+os.path.join(basedir,'database.dp')
+app.config['SQLALACHEMY_TRACK_MODIFICATIONS']=
+False
 
-# Save users to file
-def save_users(users):
-    with open('users.json', 'w') as f:
-        json.dump(users, f)
+db =SQLAlchemy(app)
+
+# Define the Product model
+class Product (db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    
+    def __repr__(self):
+        return f'<Product {self.name}>'
 
 @app.route('/')
 def home():
@@ -71,11 +77,12 @@ def admin_login():
 
 @app.route('/admin-panel')
 def admin_panel():
-    if 'admin' in session:
-        return render_template('admin_panel.html')
-    else:
-        return redirect(url_for('admin_login'))
+    if 'admin' not in session:
+        return redirect(url_for('admin.html'))
 
+     products = Product.query.all()
+     return render_template('admin_panel.html', products=products)
+                            
 # Temporary in-memory product list (will reset if app restarts)
 products = []
 
@@ -89,11 +96,9 @@ def add_product():
         price = request.form['price']
         description = request.form['description']
 
-        product = {
-            'name': name,
-            'price': price,
-            'description': description
-        }
+        product = Product(name=name,price=price,description=description)
+        db.session.add(product)
+        db.session.commit()
 
         products.append(product)
         return redirect(url_for('admin_panel'))
@@ -120,4 +125,6 @@ def products():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0',port=10000)
