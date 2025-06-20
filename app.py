@@ -101,6 +101,9 @@ def add_product():
         return redirect(url_for('admin_panel'))
 
     return render_template('add_product.html')
+    products=Product.query.all()
+    for product in products:
+        print(product.name,product.price,product.description)
 
 
 
