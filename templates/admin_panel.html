@@ -32,13 +32,15 @@
   </style>
 </head>
 <body>
-  <div class="panel">
-    <h2>Welcome, Admin!</h2>
-    <p>Here you can manage your products.</p>
-    <a href="/add-product">Add Product</a>
-    <a href="#">Add Product</a>
-    <a href="#">Edit Product</a>
-    <a href="#">Delete Product</a>
+  <h1>Admin Panel- All Products</h1>
+  {% for product in products %}
+  <div class="product">
+    <h3>{{product.name}}</h3>
+    <p><strong>Price:</strong>KES {{product.price}}</p>
+    <p>{{product.description}}</p>
+    {%else%}
+    <p>No products added yet.</p>
+    {%endfor %}
     <a href="/logout">Logout</a>
   </div>
 </body>
