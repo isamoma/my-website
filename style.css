@@ -123,3 +123,13 @@ p {
 .admin-link:hover {
   background-color: #000;
 }
+
+.btn.logout.{
+   background-color:red;
+  color:white;
+}
+
+          
+.btn.logout:hover{
+  background-color:darkred;
+}
