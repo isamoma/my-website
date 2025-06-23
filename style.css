@@ -64,7 +64,28 @@ p {
   text-align: center;
   transition: background-color 0.3s ease;
   font-weight: 600;
-}
+} 
+
+.dashboard-box {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background-color: #666;
 
 .button:hover {
   background-color: white;
