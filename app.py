@@ -70,7 +70,7 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return f"Welcome, {current_user.username}!"
+    return render_template('dashboard.html',current_user=current_user)
 
 @app.route('/logout')
 @login_required
