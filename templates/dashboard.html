@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" context="width device-width,initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{{url_for(style.css)}}">
     <style>
         body {
             font-family: Arial;
@@ -14,17 +11,34 @@
             padding-top: 100px;
         }
 
-       
+        .dashboard-box {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background-color: #666;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-box">
-        <h2>Welcome, this is the dashboard!</h2>
-        <p>Hello!</p>
-        <p>You're now logged in, what would you like to do today!</p>
-        <a href="/products">See our Products</a>
-        <a href="/"class="btn">Back to Home</a>
-        <a href="/logout"class="btn logout">Logout</a>
+        <h2>Welcome, {{ username }}!</h2>
+        <p>This is your dashboard. More features coming soon!</p>
+        <a href="/logout">Logout</a>
     </div>
 </body>
 </html>
