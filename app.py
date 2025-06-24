@@ -72,6 +72,12 @@ def register():
 def dashboard():
     return render_template('dashboard.html',current_user=current_user)
 
+@app.route('/products')
+def product():
+    if 'username' in session:
+        return render_template('products.html,username=session['username'])
+    return redirect(url_for('login'))
+
 @app.route('/logout')
 @login_required
 def logout():
