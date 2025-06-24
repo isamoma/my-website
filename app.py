@@ -59,12 +59,18 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        hashed_pw = generate_password_hash(password)
-        new_user = User(username=username, password=hashed_pw)
-        db.session.add(new_user)
-        db.session.commit()
+        if username in users:
+            return "User already exists!"
 
-        return redirect('/login')
+        hashed_password = generate_password_hash(password)
+        users[username]={
+            "id":username,
+            "username":username,
+            "password":hashed_password
+        }
+        
+        login_user(User(username,username))
+        return redirect('/dashboard')
     return render_template('register.html')
 
 @app.route('/dashboard')
