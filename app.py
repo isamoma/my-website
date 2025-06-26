@@ -59,18 +59,18 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        if username in User:
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
             return "User already exists!"
 
         hashed_password = generate_password_hash(password)
-        users[username]={
-            "id":username,
-            "username":username,
-            "password":hashed_password
-        }
-        
-        login_user(User(username,username))
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        login_user(new_user)
         return redirect('/dashboard')
+        
     return render_template('register.html')
 
 @app.route('/dashboard')
