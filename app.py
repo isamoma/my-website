@@ -9,7 +9,6 @@ app.secret_key = 'yoursecretkey'
 # Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-users()
 
 # Login manager setup (optional for user accounts)
 login_manager = LoginManager()
@@ -60,7 +59,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        if username in users:
+        if username in user:
             return "User already exists!"
 
         hashed_password = generate_password_hash(password)
