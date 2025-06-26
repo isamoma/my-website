@@ -79,10 +79,9 @@ def dashboard():
     return render_template('dashboard.html',current_user=current_user)
 
 @app.route('/products')
+@login_required
 def product():
-    if 'username' in session or current_user.is_authenticated:
-        return render_template('products.html',username=current_user.username)
-    return redirect(url_for('login'))
+    return render_template('products.html',username=current_user.username)
 
 @app.route('/logout')
 @login_required
