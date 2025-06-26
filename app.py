@@ -60,7 +60,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        if username in user:
+        if username in users:
             return "User already exists!"
 
         hashed_password = generate_password_hash(password)
