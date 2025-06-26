@@ -81,7 +81,7 @@ def dashboard():
 @app.route('/products')
 def product():
     if 'username' in session:
-        return render_template('products.html,username=session['username'])
+        return render_template('products.html',username=session['username'])
     return redirect(url_for('login'))
 
 @app.route('/logout')
