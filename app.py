@@ -9,7 +9,6 @@ app.secret_key = 'yoursecretkey'
 # Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-users{}
 
 # Login manager setup (optional for user accounts)
 login_manager = LoginManager()
