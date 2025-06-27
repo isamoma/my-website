@@ -46,7 +46,7 @@ button {
   padding: 12px 28px;
   font-size: 1em;
   font-weight: 600;
-  background: hsl(66, 82%, 52%);
+  background: oklch(85.938% 0.19149 116.229 / 0.486);
   color: white;
   border: none;
   border-radius: 8px;
@@ -92,7 +92,7 @@ button:hover {
   margin-top: 10px;
   color:white;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 .buy-btn:hover{
   background-color: darkgreen;
