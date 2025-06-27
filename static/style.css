@@ -92,7 +92,7 @@ button:hover {
   margin-top: 10px;
   color:white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 .buy-btn:hover{
   background-color: darkgreen;
