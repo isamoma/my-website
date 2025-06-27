@@ -37,7 +37,11 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
+<<<<<<< HEAD
     return render_template('index.html')
+=======
+    return render_template('admin_panel.html')
+>>>>>>> a666d968286557139014a241d8c9ae802d352872
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -132,4 +136,8 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(host='0.0.0.0',port=10000)
+<<<<<<< HEAD
    
+=======
+   
+>>>>>>> a666d968286557139014a241d8c9ae802d352872
