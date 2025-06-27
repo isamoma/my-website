@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body>
+  <h1>Admin Panel- All Products</h1>
+  {% for product in products %}
+  <div class="product">
+    <h3>{{product.name}}</h3>
+    <p><strong>Price:</strong>KES {{product.price}}</p>
+    <p>{{product.description}}</p>
+    {%else%}
+    <p>No products added yet.</p>
+    {%endfor %}
+    <a href="/logout">Logout</a>
+  </div>
+</body>
+</html>

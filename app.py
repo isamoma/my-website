@@ -1,35 +1,135 @@
 from flask import Flask, render_template, request, redirect, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"
+app.secret_key = 'yoursecretkey'
 
-users = {"admin": "password123"}
+# Database setup
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
 
-@app.route("/")
-def home():
-    if "username" in session:
-        return f"Welcome {session['username']} <br><a href='/logout'>Logout</a>"
-    return redirect("/login")
+# Login manager setup (optional for user accounts)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
-@app.route("/login", methods=["GET", "POST"])
+# ---------- MODELS ----------
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    price = db.Column(db.Float)
+    description = db.Column(db.String(200))
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(200)) # hashed
+
+# ---------- LOAD USER (only needed if using Flask-Login) ----------
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# ---------- ROUTES ----------
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        if username in users and users[username] == password:
-            session["username"] = username
-            return redirect("/")
-        return "Invalid credentials"
-    return render_template("login.html")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
 
-@app.route("/logout")
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect('/dashboard')
+        else:
+            return 'Invalid credentials'
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return "User already exists!"
+
+        hashed_password = generate_password_hash(password)
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        login_user(new_user)
+        return redirect('/dashboard')
+        
+    return render_template('register.html')
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html',current_user=current_user)
+
+@app.route('/products')
+@login_required
+def product():
+    return render_template('products.html',username=current_user.username)
+
+@app.route('/logout')
+@login_required
 def logout():
-    session.pop("username", None)
-    return redirect("/login")
+    logout_user()
+    return redirect('/login')
 
-@app.route("/market")
-def market():
-    return render_template("market.html")
+# ---------- ADMIN LOGIN (using session, not Flask-Login) ----------
 
-if __name__ == "__main__":
+admin_hashed_password = generate_password_hash("admin123")
+
+@app.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and check_password_hash(admin_hashed_password, password):
+            session['admin'] = True
+            return redirect('/admin-panel')
+        else:
+            return 'Invalid login'
+    return render_template('admin_login.html')
+
+@app.route('/admin-panel')
+def admin_panel():
+    if not session.get('admin'):
+        return redirect('/admin-login')
+
+    products = Product.query.all()
+    return render_template('admin_panel.html', products=products)
+
+@app.route('/add-product', methods=['GET', 'POST'])
+def add_product():
+    if request.method == 'POST':
+        name = request.form['name']
+        price = float(request.form['price'])
+        description = request.form['description']
+
+        product = Product(name=name, price=price, description=description)
+        db.session.add(product)
+        db.session.commit()
+
+        return redirect('/admin-panel')
+    return render_template('add_product.html')
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0',port=10000)
+   

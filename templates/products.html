@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Our Products</title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <h2>Welcome, {{ username }}! Explore Our Products</h2>
+
+    <div class="product-container">
+        <div class="product">
+            <h3>Luxury Perfume</h3>
+            <p>Price: KSh 1,500</p>
+            <p>Long-lasting and elegant fragrance.</p>
+             <a
+    href="https://wa.me/254117346860?text=Hi%20Isa%2C%20I%20want%20to%20buy%20the%20Luxury%20Perfume"
+    target="_blank"
+    class="buy-btn"
+  >
+    Buy Now
+  </a>
+        </div>
+        <div class="product">
+            <h3>Phone Stand</h3>
+            <p>Price: KSh 500</p>
+            <p>Durable, sleek, and perfect for your desk.</p>
+             <a
+    href="https://wa.me/254117346860?text=Hi%20Isa%2C%20I%20want%20to%20buy%20the%20Luxury%20Perfume"
+    target="_blank"
+    class="buy-btn"
+  >
+    Buy Now
+  </a>
+        </div>
+        <div class="product">
+            <h3>Lip Gloss</h3>
+            <p>Price: KSh 300</p>
+            <p>Shiny, natural, and smooth on lips.</p>
+             <a
+    href="https://wa.me/254117346860?text=Hi%20Isa%2C%20I%20want%20to%20buy%20the%20Luxury%20Perfume"
+    target="_blank"
+    class="buy-btn"
+  >
+    Buy Now
+  </a>
+        </div>
+    </div>
+
+    <a href="/dashboard">Back to Dashboard</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>
