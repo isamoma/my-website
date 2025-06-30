@@ -1,0 +1,15 @@
+<!-- templates/profile.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>Account Created: {{ user.created_at.strftime('%B %d, %Y') }}</p>
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>
