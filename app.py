@@ -17,6 +17,9 @@ login_manager.init_app(app)
 from datetime import datetime
 
 class User(db.Model, UserMixin):
+    __tablename__ = 'user'
+    __table_args__ = {'extend_existing': True} # 👈 add this line
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200)) # hashed
@@ -45,6 +48,11 @@ def load_user(user_id):
 @app.route("/")
 def index():
    return redirect('index.html')
+
+@app.route('/post')
+@login_required
+def post():
+        pass
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -85,6 +93,11 @@ def register():
 @login_required
 def dashboard():
     return render_template('dashboard.html',current_user=current_user)
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('product.html',user=current_user)
 
 @app.route('/products')
 @login_required
@@ -139,5 +152,4 @@ def add_product():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0',port=10000)
-   
+    app.run(host='0.0.0.0',port=10000)   
