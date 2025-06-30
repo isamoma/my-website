@@ -94,7 +94,7 @@ def dashboard():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('product.html',user=current_user)
+    return render_template('profile.html',user=current_user)
 
 @app.route('/products')
 @login_required
