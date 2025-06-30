@@ -16,8 +16,8 @@ login_manager.init_app(app)
 
 from datetime import datetime
 
-class User(db.Model, UserMixin):
-    __tablename__ = 'user'
+class UserProfile(db.Model, UserMixin):
+    __tablename__ = 'userr_profile'
     __table_args__ = {'extend_existing': True} # 👈 add this line
 
     id = db.Column(db.Integer, primary_key=True)
@@ -33,16 +33,13 @@ class Product(db.Model):
     price = db.Column(db.Float)
     description = db.Column(db.String(200))
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(200)) # hashed
+
 
 # ---------- LOAD USER (only needed if using Flask-Login) ----------
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return UserProfile.query.get(int(user_id))
 
 # ---------- ROUTES ----------
 @app.route("/")
@@ -60,7 +57,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
+        user = UserProfile.query.filter_by(username=username).first()
 
         if user and check_password_hash(user.password, password):
             login_user(user)
@@ -75,12 +72,12 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        existing_user = User.query.filter_by(username=username).first()
+        existing_user = UserProfile.query.filter_by(username=username).first()
         if existing_user:
             return "User already exists!"
 
         hashed_password = generate_password_hash(password)
-        new_user = User(username=username, password=hashed_password)
+        new_user = UserProfile(username=username, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
 
