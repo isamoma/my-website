@@ -33,6 +33,21 @@ class Product(db.Model):
     price = db.Column(db.Float)
     description = db.Column(db.String(200))
 
+from app import db, User
+from werkzeug.security import generate_password_hash
+
+# Create admin user
+admin_user = User(
+    username='admin',
+    password=generate_password_hash('admin123')
+)
+
+# Add to database
+db.session.add(admin_user)
+db.session.commit()
+
+print("✅ Admin user created successfully!")
+
 
 
 # ---------- LOAD USER (only needed if using Flask-Login) ----------
@@ -61,10 +76,18 @@ def login():
 
         if user and check_password_hash(user.password, password):
             login_user(user)
+            if user.is_admin:
+                return redirect('/admin-panel')
             return redirect('/dashboard')
         else:
             return 'Invalid credentials'
     return render_template('login.html')
+
+@app.route('/admin-login',methods=['GET','POST'])
+def admin_login():
+    if request.method =='POST':
+        pass
+    return render_template(admin_login.html)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -107,28 +130,11 @@ def logout():
     logout_user()
     return redirect('/login')
 
-# ---------- ADMIN LOGIN (using session, not Flask-Login) ----------
-
-admin_hashed_password = generate_password_hash("admin123")
-
-@app.route('/admin-login', methods=['GET', 'POST'])
-def admin_login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        if username == 'admin' and check_password_hash(admin_hashed_password, password):
-            session['admin'] = True
-            return redirect('/admin-panel')
-        else:
-            return 'Invalid login'
-    return render_template('admin_login.html')
-
 @app.route('/admin-panel')
+@login_required
 def admin_panel():
-    if not session.get('admin'):
-        return redirect('/admin-login')
-
+    if not current_user.is_admin:
+        return "Access Denied", 403
     products = Product.query.all()
     return render_template('admin_panel.html', products=products)
 
