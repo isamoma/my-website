@@ -15,8 +15,10 @@
      <a href="https://login-website-zbkl.onrender.com/admin-login" class="admin-link">Admin Login</a>
     <a href="https://login-website-zbkl.onrender.com/register" class="button">
       <button style="padding: 10px 20px; background-color: hsl(219, 100%, 50%);color: white;border: none;
-      border-radius:5px;" Sign In </a>
-    <a href="https://login-website-zbkl.onrender.com/register" class="button">Sign In</a>
+      border-radius:5px;" Sign In</a>
+      {% if current_user.is_authenticated and current_user.is_admin %}
+  <a href="/admin-panel" class="admin-link">Admin Panel</a>
+{% endif %}
      <a href="https://login-website-zbkl.onrender.com/register" class="login-link">Create Account</a>
     <a href="https://tiktok.com/@isamoma003" target="_blank">
      <button style="padding: 10px 20px; background-color: yellow;color: white;border: none;
