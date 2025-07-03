@@ -37,7 +37,7 @@ from app import db, UserProfile
 from werkzeug.security import generate_password_hash
 
 # Create admin user
-admin_user = User(
+admin_user = UserProfile(
     username='admin',
     password=generate_password_hash('admin123')
 )
