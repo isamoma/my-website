@@ -33,7 +33,6 @@ class Product(db.Model):
     price = db.Column(db.Float)
     description = db.Column(db.String(200))
 
-from app import db, UserProfile
 from werkzeug.security import generate_password_hash
 
 # Create admin user
