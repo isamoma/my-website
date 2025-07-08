@@ -41,9 +41,6 @@ admin_user = UserProfile(
     password=generate_password_hash('admin123')
 )
 
-# Add to database
-db.session.add(admin_user)
-db.session.commit()
 
 print("✅ Admin user created successfully!")
 
