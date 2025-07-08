@@ -33,11 +33,11 @@ class Product(db.Model):
     price = db.Column(db.Float)
     description = db.Column(db.String(200))
 
-from app import db, User
+from app import db, UserProfile
 from werkzeug.security import generate_password_hash
 
 # Create admin user
-admin_user = User(
+admin_user = UserProfile(
     username='admin',
     password=generate_password_hash('admin123')
 )
@@ -83,11 +83,18 @@ def login():
             return 'Invalid credentials'
     return render_template('login.html')
 
-@app.route('/admin-login',methods=['GET','POST'])
+@app.route('/admin-login', methods=['GET', 'POST'])
 def admin_login():
-    if request.method =='POST':
-        pass
-    return render_template(admin_login.html)
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and check_password_hash(username, password):
+            login_user(UserProfile.query.filter_by(username='admin').first())
+            return redirect('/admin-panel')
+        else:
+            return 'Invalid login'
+    return render_template('admin_login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -155,4 +162,11 @@ def add_product():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        #Optional: Create an admin user only if one doesn't exist
+        if not UserProfile.query.filter_by(username='admin').first():
+            admin_user=UserProfile(username='admin',password=generate_password_hash('admin123'))
+            db.session.add(admin_user)
+            db.session.commit()
+
+
     app.run(host='0.0.0.0',port=10000)   
