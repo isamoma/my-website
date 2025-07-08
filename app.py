@@ -66,6 +66,20 @@ def index():
 def post():
         pass
 
+def create_admin_user():
+    with app.app_context():
+        admin=UserProfile.query.filter_by(username= "admin").first()
+        if not admin:
+            admin_user=UserProfile(
+                username="admin",
+                password=generate_password_hash("admin123")
+            )
+            db.session.add(admin_user)
+            db.session.commit()
+            print("Admin user created")
+        else:
+            print("Admin user already exists")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -162,14 +176,5 @@ def add_product():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-
-        from werkzeug.security import generate_password_hash
-        admin_user=UserProfile(username="admin",password=generate_password_hash("admin123"))
-        db.session.add(admin_user)
-        db.session.commit()
-                                
-        
-
-
-
-    app.run(host='0.0.0.0',port=10000)   
+        create_admin_user()
+        app.run(host='0.0.0.0',port=10000)   
