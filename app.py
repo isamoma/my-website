@@ -162,11 +162,14 @@ def add_product():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        #Optional: Create an admin user only if one doesn't exist
-        if not UserProfile.query.filter_by(username='admin').first():
-            admin_user=UserProfile(username='admin',password=generate_password_hash('admin123'))
-            db.session.add(admin_user)
-            db.session.commit()
+
+        from werkzeug.security import generate_password_hash
+        admin_user=UserProfile(username="admin",password=generate_password_hash("admin123"))
+        db.session.add(admin_user)
+        db.session.commit()
+                                
+        
+
 
 
     app.run(host='0.0.0.0',port=10000)   
