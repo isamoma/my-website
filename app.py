@@ -154,7 +154,8 @@ def admin_panel():
         return "Access Denied", 403
     products = Product.query.all()
     return render_template('admin_panel.html', products=products)
-
+    
+    
 @app.route('/add-product', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
@@ -172,5 +173,4 @@ def add_product():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        create_admin_user()
-        app.run(host='0.0.0.0',port=10000)   
+    app.run(host='0.0.0.0',port=10000)   
