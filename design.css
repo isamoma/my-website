@@ -1,0 +1,110 @@
+body {
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 25px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+a.button,
+button {
+  text-decoration: none;
+  padding: 12px 28px;
+  font-size: 1em;
+  font-weight: 600;
+  background: oklch(85.938% 0.19149 116.229 / 0.486);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+a.button:hover,
+button:hover {
+  background: #d81b60;
+  transform: translateY(-2px);
+}
+
+.container {
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero-text {
+  background-color: rgba(0,0,0,0.5);
+  padding: 60px 20px;
+  border-radius: 10px;
+}
+
+.login-link {
+  margin-top: 20px;
+  display: inline-block;
+  background-color: #333;
+  padding: 10px 25px;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-buy{
+  display: inline-block;
+  background-color: green;
+  padding:10px 20px;
+  margin-top: 10px;
+  color:white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.buy-btn:hover{
+  background-color: darkgreen;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
