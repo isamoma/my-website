@@ -46,23 +46,23 @@ button {
   padding: 12px 28px;
   font-size: 1em;
   font-weight: 600;
-  background: oklch(85.938% 0.19149 116.229 / 0.486);
+  background: oklch(62.453% 0.23573 12.185 / 0.615);
   color: white;
-  border: none;
+  border: auto;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   cursor: pointer;
 }
 
 a.button:hover,
 button:hover {
-  background: #d81b60;
+  background: hsl(210, 80%, 61%);
   transform: translateY(-2px);
 }
 
 .container {
-  background: rgba(0,0,0,0.6);
+  background: rgba(227, 17, 206, 0.6);
   padding: 40px;
   border-radius: 10px;
   max-width: 800px;
@@ -85,18 +85,6 @@ button:hover {
   text-decoration: none;
 }
 
-.btn-buy{
-  display: inline-block;
-  background-color: green;
-  padding:10px 20px;
-  margin-top: 10px;
-  color:white;
-  text-decoration: none;
-  border-radius: 8px;
-}
-.buy-btn:hover{
-  background-color: darkgreen;
-}
 
 @media (max-width: 600px) {
   h1 {
