@@ -14,7 +14,7 @@ body {
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: url('background.jpg') no-repeat center center fixed;
+  background-image: url('background2.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
   text-align: center;
@@ -62,7 +62,7 @@ button:hover {
 }
 
 .container {
-  background: rgba(227, 17, 206, 0.6);
+  background: hsl(73, 76%, 46%);
   padding: 40px;
   border-radius: 10px;
   max-width: 800px;
