@@ -68,7 +68,15 @@ button:hover {
   max-width: 800px;
   margin: auto;
 }
-
+.product-container{
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+  color: aqua;
+  
+}
 .hero-text {
   background-color: rgba(0,0,0,0.5);
   padding: 60px 20px;
@@ -107,4 +115,13 @@ button:hover {
     flex-direction: column;
     gap: 15px;
   }
+}
+.btn {
+  background: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: auto;
+  border: #fff;
+
+
 }
