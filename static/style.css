@@ -62,11 +62,12 @@ button:hover {
 }
 
 .container {
-  background: rgba(0,0,0,0.6);
+  background: rgba(226, 15, 15, 0.6);
   padding: 40px;
   border-radius: 10px;
   max-width: 800px;
   margin: auto;
+  color: azure;
 }
 .product-container{
   background: rgba(0,0,0,0.6);
@@ -78,7 +79,7 @@ button:hover {
 
 }
 .hero-text {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(209, 37, 37, 0.5);
   padding: 60px 20px;
   border-radius: 10px;
 }

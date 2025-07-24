@@ -1,7 +1,10 @@
 <!-- templates/profile.html -->
 <!DOCTYPE html>
-<html>
+<html
+lang="en">
 <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"content="width=device-width,initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -10,6 +13,10 @@
         <h2>Welcome, {{ user.username }}</h2>
         <p>Account Created: {{ user.created_at.strftime('%B %d, %Y') }}</p>
         <a href="/dashboard" class="login-link">Back to Dashboard</a>
+        <a href="/logout" class="login-link">Log Out</a>
+    </div>
+    <div class="container">
+        <p class="hero-text"> Thanks,{{ user.username}}, for joining</p>
     </div>
 </body>
 </html>
