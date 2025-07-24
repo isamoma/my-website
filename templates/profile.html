@@ -14,9 +14,10 @@ lang="en">
         <p>Account Created: {{ user.created_at.strftime('%B %d, %Y') }}</p>
         <a href="/dashboard" class="login-link">Back to Dashboard</a>
         <a href="/logout" class="login-link">Log Out</a>
-    </div>
-    <div class="container">
-        <p class="hero-text"> Thanks,{{ user.username}}, for joining</p>
+    
+        <div class="product-container">
+            <p class="hero-text"> Thanks,{{ user.username}}, for joining</p>
+        </div>
     </div>
 </body>
 </html>
