@@ -75,7 +75,7 @@ button:hover {
   max-width: 800px;
   margin: auto;
   color: aqua;
-  
+
 }
 .hero-text {
   background-color: rgba(0,0,0,0.5);
@@ -117,11 +117,12 @@ button:hover {
   }
 }
 .btn {
-  background: black;
+  background: rgb(121, 236, 13);
   padding: 10px 20px;
   text-decoration: none;
   margin: auto;
   border: #fff;
+  border-radius: 10px;
 
 
 }
