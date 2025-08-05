@@ -2,13 +2,17 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
 app = Flask(__name__)
 app.secret_key = 'yoursecretkey'
+PRODUCT_FILE ='products.json'
+
+
 
 # Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+db.init_app(app)
 
 # Login manager setup (optional for user accounts)
 login_manager = LoginManager()
@@ -22,16 +26,26 @@ class UserProfile(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(200)) # hashed
+    password = db.Column(db.String(200),) # hashed
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 # ---------- MODELS ----------
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    price = db.Column(db.Float)
-    description = db.Column(db.String(200))
+    name = db.Column(db.String(100),nullable=False)
+    price = db.Column(db.Float,nullable=False)
+    description = db.Column(db.String(255),nullable=True)
+    image_url =db.column(db.String(255), nullable=True)
+
+    def to_dict(self):
+        return{
+            "id":self.id,
+            "name":self.name,
+            "description":self.description,
+            "price":self.price,
+            "image_url":self.image_url
+        }  
 
 from werkzeug.security import generate_password_hash
 
@@ -56,6 +70,16 @@ def load_user(user_id):
 @app.route("/")
 def index():
    return redirect('index.html')
+
+import json
+@app.route('/')
+def home ():
+    try:
+        with open('products.json','r') as file:
+            products=json.load(file)
+    except(FileNotFoundError, json.JSONDecodeError):
+        products=[]
+    return render_template('products.html',products=products)
 
 @app.route('/post')
 @login_required
