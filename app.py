@@ -71,6 +71,85 @@ def load_user(user_id):
 def index():
    return redirect('index.html')
 
+from flask import Flask, render_template, request, redirect, session, url_for
+import json, os
+app.secret_key = "yoursecretkey"
+
+USERS_FILE = "users.json"
+PRODUCTS_FILE = "products.json"
+
+def load_users():
+    with open(USERS_FILE, "r") as f:
+        return json.load(f)
+
+def load_products():
+    if not os.path.exists(PRODUCTS_FILE):
+        return []
+    with open(PRODUCTS_FILE, "r") as f:
+        return json.load(f)
+
+def save_products(products):
+    with open(PRODUCTS_FILE, "w") as f:
+        json.dump(products, f, indent=4)
+
+@app.route("/")
+def home():
+    products = load_products()
+    return render_template("index.html", products=products)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        users = load_users()
+        for user in users:
+            if user["username"] == username and user["password"] == password:
+                session["user"] = username
+                session["admin"] = user.get("admin", False)
+                return redirect(url_for("admin" if user.get("admin") else "home"))
+        return "Invalid credentials"
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home"))
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    products = load_products()
+    return render_template("admin.html", products=products)
+
+@app.route("/add_product", methods=["POST"])
+def add_product():
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    name = request.form["name"]
+    price = request.form["price"]
+    desc = request.form["desc"]
+
+    products = load_products()
+    products.append({"name": name, "price": price, "desc": desc})
+    save_products(products)
+    return redirect(url_for("admin"))
+
+@app.route("/delete_product/<int:index>")
+def delete_product(index):
+    if not session.get("admin"):
+        return redirect(url_for("login"))
+
+    products = load_products()
+    if 0 <= index < len(products):
+        products.pop(index)
+        save_products(products)
+    return redirect(url_for("admin"))
+
+
 import json
 @app.route('/')
 def home ():

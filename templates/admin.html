@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <p>Welcome, {{ session['user'] }} (<a href="{{ url_for('logout') }}">Logout</a>)</p>
+
+    <h2>Add Product</h2>
+    <form method="POST" action="{{ url_for('add_product') }}">
+        <input type="text" name="name" placeholder="Product Name" required>
+        <input type="text" name="price" placeholder="Product Price" required>
+        <input type="text" name="desc" placeholder="Product Description" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong> - {{ product.price }}<br>
+            {{ product.desc }}
+            <a href="{{ url_for('delete_product', index=loop.index0) }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
