@@ -4,28 +4,85 @@
    <meta charset="UTF-8"/>
    <meta name="viewport"content="width=device-width,initial-scale=1.0">
     <title>My Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="design.css">   
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">  
+    <style>
+      body{
+        background-color: aqua;
+        background-image:url('images (1).jpeg')  ;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: aqua;
+        display: inline-block;
+        zoom: 100%;
+
+      }
+      image{
+        opacity: 4%;
+      }
+      .youtube-btn{
+        border: none;
+        border-radius: 7px;
+        background-color: #FF0000;
+        color: rgb(255, 255, 255);
+        padding: 12px 20px;
+        cursor: pointer;
+      }
+      .youtube-btn:hover{
+        background-color: aliceblue;
+        color:black;
+      }
+      .tiktok-btn{
+        width: 90px;
+        height: 50px;
+        border: none;
+        border-radius: 7px;
+        color: #fff;
+        background-color: rgb(1, 1, 37);
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        
+      }
+      .tiktok-btn:hover{
+        background-color: aqua;
+        color: rgb(247, 5, 106);
+      }
+      .login-link{
+        width: auto;
+        height: 20px;
+        border-radius: 10px;
+        border:none;
+         margin-top: 20px;
+        display: inline-block;
+        background-color: #333;
+        padding: 10px 25px;
+        border-radius: 10px;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      
+    </style>
  </head>   
  <body>
-   <div class="container">
-      <a href="https://login-website-c4lv.onrender.com/admin_panel" class="button">Admin Panel</a>
+      <a href="https://login-website-c4lv.onrender.com/admin_panel" class="login-link">Admin Panel</a>
         <h1>Welcome to Isa Moma webpage enjoy the services</h1>
         <p>If you want to learn more follow me at tiktok @isamoma</p>
-        <div class="button-group">
           <a href="https://login-website-zbkl.onrender.com/login" class="login-link">Log In </a>
               
-              <a href="https://login-website-zbkl.onrender.com/register" class="login-link">Create Account</a>
-              <a href="https://tiktok.com/@isamoma003" target="_blank">
-              <button style="padding: 10px 20px; background-color: yellow;color: white;border: none;
-              border-radius:5px;">Visit my Tiktok</a>
-              <!--youtube channel button-->
-              <a href="https://www.youtube.com/@isa_moma"target="_blank">
-              <button style="padding: 10px 20px; background-color: red;color: white;border: none;
-              border-radius:5px;">Visit My youtube</a>
-              </button>
-        </button 
-      </div>
-   </div>
+          <a href="https://login-website-zbkl.onrender.com/register" class="login-link">Create Account</a>
+ </br>
+ </br>
+          <a href="https://tiktok.com/@isamoma003"  target="_blank" >
+            <button class="tiktok-btn">
+          Visit my Tiktok</button>
+        </a>
+      </br></br>
+          <!--youtube channel button-->
+       <a href="https://www.youtube.com/@isa_moma"target="_blank">
+        <button class="youtube-btn">
+          Visit My youtube</button>
+        </a>
   </body>
  </html>

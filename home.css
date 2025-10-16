@@ -1,0 +1,12 @@
+body{
+  background-color: rgb(247, 107, 107);
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.youtube-btn{
+  width: 100px;
+  height: 70px;
+  border: none;
+  border-radius: 7px;
+}
